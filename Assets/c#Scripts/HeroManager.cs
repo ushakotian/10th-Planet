@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroManager : MonoBehaviour
 {
     private Animator anim;
+	public Text healthText;
     private Rigidbody2D rigidBody;
     public float verticalForce;
     public float horizontalForce;
@@ -28,16 +30,27 @@ public class HeroManager : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Floor") {
-            anim.SetInteger("transition", 2);
-            onGround = true;
+            if (health == 0)
+            {
+                anim.SetInteger("transition", 4);
+            }
+            else
+            {
+                anim.SetInteger("transition", 1);
+                onGround = true;
+            }
+        }
+        else if(collision.gameObject.name == "BulletTrigger") {
+            Debug.Log("Bullet Trigger | Collider Object = " + collision.gameObject.name);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("up")) {
+        if (Input.GetKeyDown("up") && onGround) {
             anim.SetInteger("transition", 3);
+            SoundManager.playClip("jump");
             rigidBody.AddForce(new Vector2(0, verticalForce), ForceMode2D.Impulse);
             onGround = false;
         }
@@ -58,25 +71,44 @@ public class HeroManager : MonoBehaviour
             trans.position = currentPosition;
             
         }
+        if(onGround)
+            anim.SetInteger("transition", 2);
+        if (health == 0)
+        {
+            anim.SetInteger("transition", 4); // player is dead
+            Invoke("Restartgame", 0.5f);
+            //Place player in the start
 
+        }
     }
 
-    //fuel can
-    private void OnTriggerEnter2D(Collider2D collision)
+    // when the life goes to zero the hero is brought back to default position
+    private void Restartgame()
     {
-        /*
-        if (collision.gameObject.name == "FuelCanAnim") {
-            if (health < MAX_HEALTH)
-            {
-                health += 10;
-            }
-            Debug.Log("Fuel health is = " + health + " | Collider Object = " + collision.gameObject.name);
-            collision.gameObject.SetActive(false);
-
-
-        }*/
-
+        // restart the loaded level.
+        Application.LoadLevel("SampleScene");
     }
+
+    //for lazer
+    /*
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "lazerParent"
+            || collision.gameObject.name == "lazerChild")
+        {
+            if (health >= 10)
+            {
+                SoundManager.playClip("lazerBeam");
+                health =  health - 10;
+                anim.SetInteger("transition", 4); // player is dead
+
+            }
+			healthText.text = "LIFE : " + health;
+            Debug.Log("Fuel health is = " + health + " | Collider Object = " + collision.gameObject.name);
+
+        }
+
+    }*/
 
     public void improveHealth(int healthAdd) {
         if (health < 100)
@@ -87,18 +119,27 @@ public class HeroManager : MonoBehaviour
     }
 
     //laser
-    private void OnTriggerStay2D(Collider2D collision) { 
     
-         if ((collision.gameObject.name == "LazerParent") || (collision.gameObject.name == "LazerChild")) {
-            if (health >= 10) {
-                health -= 10;
+    private void OnTriggerStay2D(Collider2D collision) {
 
-                if (health == 0)
-                    anim.SetInteger("transition", 4);
+        if ((collision.gameObject.name == "LazerParent") || (collision.gameObject.name == "LazerChild"))
+        {
+            //if (collision.gameObject.name == "LazerParent")
+            {
+                if (health >= 10)
+                {
+                    SoundManager.playClip("lazerBeam");
+                    health = health - 10;
+
+
+                    if (health == 0)
+                        anim.SetInteger("transition", 4); // player is dead
 
                 }
-            Debug.Log("Fuel health is = " + health + " | Collider Object = " + collision.gameObject.name);
+                healthText.text = "LIFE : " + health;
+                Debug.Log("Fuel health is = " + health + " | Collider Object = " + collision.gameObject.name);
 
+            }
         }
 
     }

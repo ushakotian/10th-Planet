@@ -10,6 +10,7 @@ public class FuelCan : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         gameObject.SetActive(false);
+        SoundManager.playClip("powerUp");
         hero.improveHealth(10);
        
 
