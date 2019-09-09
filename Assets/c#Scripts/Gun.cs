@@ -34,6 +34,7 @@ public class Gun : MonoBehaviour
        
         transform.GetComponent<Animator>().SetTrigger("shot");
        // for (int i = 1; i < 4; i++)
+       if(i < 4)
         {
             rb = transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>(); // bullet object
             transform.GetChild(i).gameObject.SetActive(true);

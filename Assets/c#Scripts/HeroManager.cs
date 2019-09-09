@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class HeroManager : MonoBehaviour
 {
     private Animator anim;
-	public Text healthText;
-    public Text distanceCovered;
-    public Text fuelCanCollected;
+	public  Text healthText;
+    public  Text distanceCovered;
+    public  Text fuelCanCollected;
     private Rigidbody2D rigidBody;
     public float verticalForce;
     private Transform trans;
     private bool onGround;
     private int health;
-    private int distance;
-    private int fuelCanCount;
+    public static int distance;
+    public static int fuelCanCount;
     private const int MAX_HEALTH = 100;
          
 
@@ -30,6 +30,10 @@ public class HeroManager : MonoBehaviour
         health = 100;
         distance = 0;
         fuelCanCount = 0;
+    }
+
+    void awake() {
+        DontDestroyOnLoad (transform.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -66,7 +70,8 @@ public class HeroManager : MonoBehaviour
             Vector2 currentPosition = trans.position;
             currentPosition.x = currentPosition.x + 0.2f;
             trans.position = currentPosition;
-            distance += 20;
+            distance += 2;
+            distanceCovered.text = "" + distance;
         }
         if (Input.GetKey("left"))
         {
@@ -82,17 +87,17 @@ public class HeroManager : MonoBehaviour
         if (health == 0)
         {
             anim.SetInteger("transition", 4); // player is dead
-            Invoke("Restartgame", 0.5f);
+            Invoke("gameOver", 1f);
             //Place player in the start
 
         }
     }
 
     // when the life goes to zero the hero is brought back to default position
-    private void Restartgame()
+    private void gameOver()
     {
         // restart the loaded level.
-        Application.LoadLevel("SampleScene");
+        Application.LoadLevel("GameOver");
     }
 
     //for lazer
@@ -127,12 +132,16 @@ public class HeroManager : MonoBehaviour
         {
             health = 100;
         }
+        fuelCanCollected.text = "" + fuelCanCount;
         Debug.Log("Fuel health is = " + health );
     }
 
     //laser
-    
-    private void OnTriggerStay2D(Collider2D collision) {
+
+    // private void OnTriggerStay2D(Collider2D collision) {
+    private void OnCollisionEnter2D(Collider2D collision)
+    {
+        
 
         if ((collision.gameObject.name == "LazerParent") || (collision.gameObject.name == "LazerChild"))
         {
@@ -148,7 +157,7 @@ public class HeroManager : MonoBehaviour
                         anim.SetInteger("transition", 4); // player is dead
 
                 }
-              //  healthText.text =  health;
+                healthText.text = " "+ health;
                 Debug.Log("Fuel health is = " + health + " | Collider Object = " + collision.gameObject.name);
 
             }

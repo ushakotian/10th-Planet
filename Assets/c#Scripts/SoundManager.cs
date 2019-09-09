@@ -41,14 +41,14 @@ public class SoundManager : MonoBehaviour
                 audioSrc.PlayOneShot(LazerBeamSound);
                 break;
 
-            /*
+            
             case "die":
                 audioSrc.PlayOneShot(DieSound);
                 break;
-
-			case "gunFire":
-				audioSrc.PlayOneShot(LazerGunFire);
-				break;*/
+                /*
+                            case "gunFire":
+                                audioSrc.PlayOneShot(LazerGunFire);
+                                break;*/
         }
 
     }

@@ -112,6 +112,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &42430527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5744491458163100549, guid: e0f31e49573afe140a2a68338baa8961,
+    type: 3}
+  m_PrefabInstance: {fileID: 2145367499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &42430528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42430527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2570a328127464ba349945cf28eeec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  lifetime: 10
+  damage: 10
+  hero: {fileID: 2120697780}
 --- !u!1 &55834074
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +752,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &285718173 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5744491458163100549, guid: e0f31e49573afe140a2a68338baa8961,
+    type: 3}
+  m_PrefabInstance: {fileID: 2021679639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &285718174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285718173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2570a328127464ba349945cf28eeec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  lifetime: 10
+  damage: 10
+  hero: {fileID: 0}
 --- !u!1 &340622404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,6 +2427,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &975573033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5744491458163100549, guid: e0f31e49573afe140a2a68338baa8961,
+    type: 3}
+  m_PrefabInstance: {fileID: 1133983678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &975573034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975573033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2570a328127464ba349945cf28eeec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  lifetime: 10
+  damage: 10
+  hero: {fileID: 0}
 --- !u!1 &978659183
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,6 +2936,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5744491458163100544, guid: e0f31e49573afe140a2a68338baa8961,
+        type: 3}
+      propertyPath: hero
+      value: 
+      objectReference: {fileID: 2120697780}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f31e49573afe140a2a68338baa8961, type: 3}
 --- !u!4 &1133983679 stripped
@@ -3597,6 +3668,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5744491458163100544, guid: e0f31e49573afe140a2a68338baa8961,
+        type: 3}
+      propertyPath: hero
+      value: 
+      objectReference: {fileID: 2120697780}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f31e49573afe140a2a68338baa8961, type: 3}
 --- !u!4 &1352193090 stripped
@@ -5070,6 +5146,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5744491458163100544, guid: e0f31e49573afe140a2a68338baa8961,
+        type: 3}
+      propertyPath: hero
+      value: 
+      objectReference: {fileID: 2120697780}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f31e49573afe140a2a68338baa8961, type: 3}
 --- !u!4 &2021679640 stripped
@@ -5097,7 +5178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &2030101779
 Animator:
   serializedVersion: 3
@@ -5606,8 +5687,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 1243316720}
-  distanceCovered: {fileID: 0}
-  fuelCanCollected: {fileID: 0}
+  distanceCovered: {fileID: 1641728402}
+  fuelCanCollected: {fileID: 1861305030}
   verticalForce: 9
 --- !u!82 &2120697787
 AudioSource:
@@ -5776,6 +5857,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5744491458163100545, guid: e0f31e49573afe140a2a68338baa8961,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0f31e49573afe140a2a68338baa8961, type: 3}
