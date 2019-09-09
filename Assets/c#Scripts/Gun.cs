@@ -9,25 +9,38 @@ public class Gun : MonoBehaviour
     public GameObject hero;
     private float shotDelayTime = 1.0f;
     private float fireForce = 2.0f;
+    int i = 0;
     // Start is called before the first frame update
     void Start()
     {
-        rb = transform.GetChild(0).gameObject.GetComponent<Rigidbody2D>(); // gun object
-        transform.GetChild(0).gameObject.SetActive(true);
+     //   rb = transform.GetChild(0).gameObject.GetComponent<Rigidbody2D>(); // bullet object
+        transform.GetChild(i).gameObject.SetActive(true);
         AdjustAngle(new Vector3(0.0f, 0.0f, 0.0f));
         InvokeRepeating("StartShooting", 2.0f, shotDelayTime *  1.0f );
+        
     }
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    void FixedUpdate()
     {
-        AdjustAngle(hero.transform.position);
-        shotBullet();
+        
+       
+        
     }
 
     private void StartShooting()
     {
+       
         transform.GetComponent<Animator>().SetTrigger("shot");
+       // for (int i = 1; i < 4; i++)
+        {
+            rb = transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>(); // bullet object
+            transform.GetChild(i).gameObject.SetActive(true);
+            AdjustAngle(hero.transform.position);
+            shotBullet();
+            i++;
+        }
         //shotBullet();
         //if (((IsInView(transform.parent.parent.GetChild(0).position)) | (IsInView(transform.position))))
         {

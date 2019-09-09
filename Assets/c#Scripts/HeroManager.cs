@@ -7,12 +7,15 @@ public class HeroManager : MonoBehaviour
 {
     private Animator anim;
 	public Text healthText;
+    public Text distanceCovered;
+    public Text fuelCanCollected;
     private Rigidbody2D rigidBody;
     public float verticalForce;
-    public float horizontalForce;
     private Transform trans;
     private bool onGround;
     private int health;
+    private int distance;
+    private int fuelCanCount;
     private const int MAX_HEALTH = 100;
          
 
@@ -25,6 +28,8 @@ public class HeroManager : MonoBehaviour
         trans = GetComponent<Transform>();
         onGround = false;
         health = 100;
+        distance = 0;
+        fuelCanCount = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -61,6 +66,7 @@ public class HeroManager : MonoBehaviour
             Vector2 currentPosition = trans.position;
             currentPosition.x = currentPosition.x + 0.2f;
             trans.position = currentPosition;
+            distance += 20;
         }
         if (Input.GetKey("left"))
         {
@@ -111,10 +117,16 @@ public class HeroManager : MonoBehaviour
     }*/
 
     public void improveHealth(int healthAdd) {
+        fuelCanCount += 1;
         if (health < 100)
+        {
             health += healthAdd;
+
+        }
         else
+        {
             health = 100;
+        }
         Debug.Log("Fuel health is = " + health );
     }
 
@@ -136,7 +148,7 @@ public class HeroManager : MonoBehaviour
                         anim.SetInteger("transition", 4); // player is dead
 
                 }
-                healthText.text = "LIFE : " + health;
+              //  healthText.text =  health;
                 Debug.Log("Fuel health is = " + health + " | Collider Object = " + collision.gameObject.name);
 
             }
