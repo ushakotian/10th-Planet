@@ -13,7 +13,7 @@ public class HeroManager : MonoBehaviour
     public float verticalForce;
     private Transform trans;
     private bool onGround;
-    private int health;
+    public static int health;
     public static int distance;
     public static int fuelCanCount;
     private const int MAX_HEALTH = 100;
@@ -133,13 +133,14 @@ public class HeroManager : MonoBehaviour
             health = 100;
         }
         fuelCanCollected.text = "" + fuelCanCount;
+        healthText.text = " " + health;
         Debug.Log("Fuel health is = " + health );
     }
 
     //laser
 
     // private void OnTriggerStay2D(Collider2D collision) {
-    private void OnCollisionEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         
 

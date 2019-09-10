@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BulletScript : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class BulletScript : MonoBehaviour
     public float damage = 10f;
     private Vector2 bulletDefaultPosition;
     public GameObject hero;
+    public Text healthText;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("FlashHero", 0, 0.5f);
+       
         //Instantiate(gameObject);
         // rigidBody = GetComponent<Rigidbody2D>();
         //targetVector = new Vector2(8.49f, -2.16f);
@@ -24,18 +26,30 @@ public class BulletScript : MonoBehaviour
         // rigidBody.AddForce(targetVector.normalized * speed);
     }
 
-    
+
 
     //public float interval;
 
-    
 
-    void FlashHero()
+
+    IEnumerator FlashHero()
     {
-       // if (hero.activeSelf)
+        // if (hero.activeSelf)
+
+        // else
+        hero.SetActive(false);
+        healthText.text = " " + HeroManager.health;
+        yield return new WaitForSeconds(0.5f);
+        hero.SetActive(true);
+    }
+
+    void FlashHero1()
+    {
+        if (hero.activeSelf)
             hero.SetActive(false);
-     //   else
-         //   hero.SetActive(true);
+        else
+            hero.SetActive(true);
+       
     }
 
     // Update is called once per frame
@@ -51,8 +65,15 @@ public class BulletScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        transform.localPosition = bulletDefaultPosition;
-
+        if (other.gameObject.name == "Hero")
+        {
+            transform.localPosition = bulletDefaultPosition;
+            HeroManager.health = HeroManager.health - 10;
+            healthText.text = " " + HeroManager.health;
+            // StartCoroutine(FlashHero());
+            //InvokeRepeating("FlashHero1", 0, 0.1f);
+            
+        }
         gameObject.SetActive(false);
     }
 
